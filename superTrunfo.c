@@ -21,8 +21,24 @@
 
 #include <stdio.h>
 
-int main() {
-    // Declaração de variáveis das Cartas
+// Definição da estrutura Carta
+// Para melhorar organização, legibildiade e manutenção do código, foi criada uma estrutura chamada Carta.
+// Essa estrutura contém todos os campos necessários para armazenar as informações de cada carta do Super Trunfo.
+struct Carta {
+    char estado;
+    char codigo[4];
+    char nomeCidade[50];
+    int populacao;
+    float area;
+    float pib;
+    int pontosTuristicos;
+    float densidadePopulacional;
+    float pibPerCapita;
+};
+
+void entradaDeDados(struct Carta* carta1, struct Carta* carta2) {
+    
+     // Declaração de variáveis das Cartas
     char estadoCarta1, estadoCarta2;
     char codigoCarta1[4], codigoCarta2[4];
     char nomeCidade1[50], nomeCidade2[50];
@@ -30,74 +46,127 @@ int main() {
     float areaCarta1, areaCarta2;
     float pibCarta1, pibCarta2;
     int pontosTuristicosCarta1, pontosTuristicosCarta2;
+    float densidadePopulacionalCarta1, densidadePopulacionalCarta2;
+    float pibPerCapitaCarta1, pibPerCapitaCarta2;
+
 
     // Entrada de dados para a Carta 1
 
     printf("Carta 1:\n");
 
     printf("Digite o estado da Carta 1 (A-H): \n");
-    scanf(" %c", &estadoCarta1);
+    scanf(" %c", &carta1->estado);
     
     printf("Digite o código da Carta 1 (01-04): \n");
-    scanf("%s", codigoCarta1);
+    scanf("%s", carta1->codigo);
 
     printf("Digite o nome da cidade: \n");
-    scanf(" %[^\n]", nomeCidade1);
+    scanf(" %[^\n]", carta1->nomeCidade);
+
+    printf("Digite a população da cidade: \n");
+    scanf("%d", &carta1->populacao);
 
     printf("Digite a Área da cidade em KM^2: \n");
-    scanf("%f", &areaCarta1);
+    scanf("%f", &carta1->area);
 
 
     printf("Digite o PIB da cidade: \n");
-    scanf("%f", &pibCarta1);
+    scanf("%f", &carta1->pib);
 
 
     printf("Digite a quantidade de pontos turisticos: \n");
-    scanf("%d", &pontosTuristicosCarta1);
+    scanf("%d", &carta1->pontosTuristicos);
 
     // Entrada de dados para a Carta 2
 
     printf("Carta 2:\n");
 
     printf("Digite o estado da Carta 2 (A-H): \n");
-    scanf(" %c", &estadoCarta2);
+    scanf(" %c", &carta2->estado);
     
     printf("Digite o código da Carta 2 (01-04): \n");
-    scanf("%s", codigoCarta2);
+    scanf("%s", carta2->codigo);
 
     printf("Digite o nome da cidade: \n");
-    scanf(" %[^\n]", nomeCidade2);
+    scanf(" %[^\n]", carta2->nomeCidade);
+
+    printf("Digite a população da cidade: \n");
+    scanf("%d", &carta2->populacao);
 
     printf("Digite a Área da cidade em KM^2: \n");
-    scanf("%f", &areaCarta2);
+    scanf("%f", &carta2->area);
 
 
     printf("Digite o PIB da cidade: \n");
-    scanf("%f", &pibCarta2);
+    scanf("%f", &carta2->pib);
 
 
     printf("Digite a quantidade de pontos turisticos: \n");
-    scanf("%d", &pontosTuristicosCarta2);
+    scanf("%d", &carta2->pontosTuristicos);
+};
 
-    // Visualização dos dados da Carta 1
+void calculaDensidadePopulacional(struct Carta* carta1, struct Carta* carta2) {
+    // Cálculo da densidade populacional e PIB per capita para a Carta 1
+    carta1->densidadePopulacional = (float)carta1->populacao / carta1->area;
 
-    printf("\nDados da Carta 1: \n");
-    printf("Estado: %c\n", estadoCarta1);
-    printf("Código da Carta: %c%s\n", estadoCarta1, codigoCarta1);
-    printf("Nome da Cidade: %s\n", nomeCidade1);    
-    printf("Área: %.2f km²\n", areaCarta1);
-    printf("PIB: %.2f\n", pibCarta1);
-    printf("Pontos Turísticos: %d\n", pontosTuristicosCarta1);
 
-    // Visualização dos dados da Carta 2
-    
-    printf("\nDados da Carta 2: \n");
-    printf("Estado: %c\n", estadoCarta2);
-    printf("Código da Carta: %c%s\n", estadoCarta2, codigoCarta2);
-    printf("Nome da Cidade: %s\n", nomeCidade2);    
-    printf("Área: %.2f km²\n", areaCarta2);
-    printf("PIB: %.2f\n", pibCarta2);
-    printf("Pontos Turísticos: %d\n", pontosTuristicosCarta2);
+    // Cálculo da densidade populacional e PIB per capita para a Carta 2
+    carta2->densidadePopulacional = (float)carta2->populacao / carta2->area;   
+};
+
+void calculoPIBPerCapita(struct Carta* carta1, struct Carta* carta2) {
+    // Cálculo do PIB per capita para a Carta 1
+    carta1->pibPerCapita = carta1->pib / carta1->populacao;
+
+    // Cálculo do PIB per capita para a Carta 2
+    carta2->pibPerCapita = carta2->pib / carta2->populacao;
+};
+
+void exibicaoDeDados(struct Carta* carta1, struct Carta* carta2) {
+    // Exibição dos dados da Carta 1
+    printf("\nCarta 1:\n");
+    printf("Estado: %c\n", carta1->estado);
+    printf("Código: %s\n", carta1->codigo);
+    printf("Nome da Cidade: %s\n", carta1->nomeCidade);
+    printf("População: %d\n", carta1->populacao);
+    printf("Área: %.2f km²\n", carta1->area);
+    printf("PIB: %.2f\n", carta1->pib);
+    printf("Pontos Turísticos: %d\n", carta1->pontosTuristicos);
+    printf("Densidade Populacional: %.2f habitantes/km²\n", carta1->densidadePopulacional);
+    printf("PIB per Capita: %.2f\n", carta1->pibPerCapita);
+
+    // Exibição dos dados da Carta 2
+    printf("\nCarta 2:\n");
+    printf("Estado: %c\n", carta2->estado);
+    printf("Código: %s\n", carta2->codigo);
+    printf("Nome da Cidade: %s\n", carta2->nomeCidade);
+    printf("População: %d\n", carta2->populacao);
+    printf("Área: %.2f km²\n", carta2->area);
+    printf("PIB: %.2f\n", carta2->pib);
+    printf("Pontos Turísticos: %d\n", carta2->pontosTuristicos);
+    printf("Densidade Populacional: %.2f habitantes/km²\n", carta2->densidadePopulacional);
+    printf("PIB per Capita: %.2f\n", carta2->pibPerCapita);
+};
+
+int main() {
+    struct Carta carta1, carta2;
+    entradaDeDados(&carta1, &carta2);
+    calculaDensidadePopulacional(&carta1, &carta2);
+    calculoPIBPerCapita(&carta1, &carta2);
+    exibicaoDeDados(&carta1, &carta2);
+    //-----------------------------------------------------------------//
+
+    // // Cálculo da densidade populacional e PIB per capita para a Carta 1
+
+    // densidadePopulacionalCarta1 = populacaoCarta1 / areaCarta1;
+    // pibPerCapitaCarta1 = pibCarta1 /  populacaoCarta1;
+
+    //  // Cálculo da densidade populacional e PIB per capita para a Carta 2
+
+    // densidadePopulacionalCarta2 =  populacaoCarta2 / areaCarta2;
+    // pibPerCapitaCarta2 = pibCarta2 /  populacaoCarta2;
+
+ 
 
     return 0;
 }
