@@ -37,7 +37,7 @@ struct Carta {
 };
 
 void entradaDeDados(struct Carta* carta1, struct Carta* carta2) {
-    
+
      // Declaração de variáveis das Cartas
     char estadoCarta1, estadoCarta2;
     char codigoCarta1[4], codigoCarta2[4];
@@ -150,23 +150,14 @@ void exibicaoDeDados(struct Carta* carta1, struct Carta* carta2) {
 
 int main() {
     struct Carta carta1, carta2;
+
     entradaDeDados(&carta1, &carta2);
+
     calculaDensidadePopulacional(&carta1, &carta2);
+
     calculoPIBPerCapita(&carta1, &carta2);
+
     exibicaoDeDados(&carta1, &carta2);
-    //-----------------------------------------------------------------//
-
-    // // Cálculo da densidade populacional e PIB per capita para a Carta 1
-
-    // densidadePopulacionalCarta1 = populacaoCarta1 / areaCarta1;
-    // pibPerCapitaCarta1 = pibCarta1 /  populacaoCarta1;
-
-    //  // Cálculo da densidade populacional e PIB per capita para a Carta 2
-
-    // densidadePopulacionalCarta2 =  populacaoCarta2 / areaCarta2;
-    // pibPerCapitaCarta2 = pibCarta2 /  populacaoCarta2;
-
- 
-
+    
     return 0;
 }
